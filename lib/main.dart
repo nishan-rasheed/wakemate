@@ -1,20 +1,32 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+
+
 import 'package:alarm/alarm.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wakemate/home_screen.dart';
 
-import 'home_screen.dart';
+Future<void> main() async{
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await Alarm.init(showDebugLogs: true);
+  runApp(const MyApp());
+}
 
-  runApp(
-    MaterialApp(
-      theme: ThemeData(useMaterial3: false),
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       home: const ExampleAlarmHomeScreen(),
-    ),
-  );
+    );
+  }
 }
